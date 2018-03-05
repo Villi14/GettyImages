@@ -26,12 +26,12 @@ class SearchPhotoViewController: UIViewController {
         }
     }
     lazy private var tableView: UITableView = {
-        let tableV = UITableView(frame: .zero, style: .plain)
-        tableV.translatesAutoresizingMaskIntoConstraints = false
-        tableV.separatorStyle = .none
-        tableV.delegate = self
-        tableV.dataSource = self
-        return tableV
+        let table = UITableView(frame: .zero, style: .plain)
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.separatorStyle = .none
+        table.delegate = self
+        table.dataSource = self
+        return table
     }()
     lazy private var clearHistory: UIButton = {
         let button = UIButton(type: .system)
@@ -41,10 +41,10 @@ class SearchPhotoViewController: UIViewController {
         button.addTarget(self, action: #selector(touchClearHostory), for: .touchUpInside)
         return button
     }()
-    lazy private var spiner: UIActivityIndicatorView = {
-        let spiner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        spiner.center = view.center
-        return spiner
+    lazy private var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        spinner.center = view.center
+        return spinner
     }()
     
     private var inMemoryCache: InMemmoryCachedPhotoPersistentStorage!
@@ -56,7 +56,7 @@ class SearchPhotoViewController: UIViewController {
         setupSearchController()
         view.addSubview(tableView)
         view.addSubview(clearHistory)
-        view.addSubview(spiner)
+        view.addSubview(spinner)
         setupAutoLayout()
         
         let fileSystemStorage = FileSystemPhotoPersistentStorage()
@@ -197,9 +197,9 @@ extension SearchPhotoViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.searchText = searchBar.text
-        Spiner.changeState(spiner: spiner, isShow: true)
+        Spinner.changeState(spinner: spinner, isShow: true)
         searchPhotoProvider.onSearch(text: self.searchText ?? "") {[weak self] photoEntity  in
-            Spiner.changeState(spiner: self?.spiner, isShow: false)
+            Spinner.changeState(spinner: self?.spinner, isShow: false)
             if let photoEntity = photoEntity {
                 self?.listPhotoEntity.append(photoEntity)
             } else {

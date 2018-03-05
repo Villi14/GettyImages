@@ -18,10 +18,10 @@ class PhotoViewController: UIViewController {
         photo.translatesAutoresizingMaskIntoConstraints = false
         return photo
     }()
-    lazy private var spiner: UIActivityIndicatorView = {
-        let spiner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        spiner.center = view.center
-        return spiner
+    lazy private var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        spinner.center = view.center
+        return spinner
     }()
     lazy private var realmStorage = RealmPhotoEntityPersistentStorage()
 
@@ -40,7 +40,7 @@ class PhotoViewController: UIViewController {
         }
         view.backgroundColor = .white
         view.addSubview(photo)
-        view.addSubview(spiner)
+        view.addSubview(spinner)
         setupAutoLayout()
     }
     
@@ -59,10 +59,10 @@ class PhotoViewController: UIViewController {
     }
     
     fileprivate func dowload() {
-        Spiner.changeState(spiner: self.spiner, isShow: true)
+        Spinner.changeState(spinner: self.spinner, isShow: true)
         searchPhotoProvider.onDownload(id: photoEntity.id) { [weak self]  uri in
             guard let strongSelf = self else { return }
-            Spiner.changeState(spiner: strongSelf.spiner, isShow: false)
+            Spinner.changeState(spinner: strongSelf.spinner, isShow: false)
             if let uri = uri {
                 strongSelf.photoEntity.uri = uri
                 if let image = strongSelf.inMemoryCache.imageForKey(strongSelf.photoEntity.id) {

@@ -1,5 +1,5 @@
 //
-//  Spiner.swift
+//  Spinner.swift
 //  GettyImages
 //
 //  Created by Alexandr Velikotskiy on 3/4/18.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class Spiner {
-    static func changeState(spiner: UIActivityIndicatorView?, isShow: Bool) {
-        if let spiner = spiner {
+class Spinner {
+    static func changeState(spinner: UIActivityIndicatorView?, isShow: Bool) {
+        if let spinner = spinner {
             DispatchQueue.main.async {
                 if isShow {
-                    spiner.startAnimating()
+                    spinner.startAnimating()
                 } else {
-                    spiner.stopAnimating()
+                    spinner.stopAnimating()
                 }
-                spiner.isHidden = !isShow
+                spinner.isHidden = !isShow
             }
         }
     }
